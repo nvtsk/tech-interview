@@ -6,22 +6,23 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages./
 
-
 # Task
+
 ## We need to implement search engine
+
 Search "engine" requirements:
 
-+ Search data source `search.json` should be persisted, and should not be re-downloaded on each app load (for FE implementaion only).
++ Search data source `search.json` should be persisted, and should not be re-downloaded on each app load (for FE implementation only).
 + Each search request should be cached in order to prevent unnecessary search function invocation
 + Minimum string length to initiate search should be 2 symbols
-+ Fields used to search: type, name (Model defined below)
++ Fields used to search: `type`, `name`
 + Results prioritization
   + Market
   + Growing price: `lastTradedPrevious` closer to all time high price `high`
   + Type
 
+### Display options (React)
 
-### Display options (React):
 + For the search we should use just input field, no buttons or additional actions \
 + For displaying search result show a list where each list item looks like below:\
 
@@ -38,6 +39,7 @@ grey - if price are equal\
 green - if `price` > `lastTradedPrevious`
 
 ## Model
+
 ``` ts
 type Market = "US" | "CH" | "EU" | "IN";
 type ItemType = "PRIVATE" | "OFFCHAIN" | "ONCHAIN";
@@ -62,17 +64,12 @@ interface Model {
 ```
 
 ## Priority
+
 ``` js
 const marketPriority: Record<number, Market> = {
   "US": 1,
   "CH": 2,
   "EU": 3,
   "IN": 4,
-};
-
-const typePriority: Record<number, ItemType> = {
-  "ONCHAIN": 1,
-  "OFFCHAIN": 2,
-  "PRIVATE": 3,
 };
 ```
